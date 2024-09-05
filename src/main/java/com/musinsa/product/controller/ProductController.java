@@ -71,7 +71,7 @@ public class ProductController {
 						.build());
 	}
 	
-	@GetMapping("/low-price/category")
+	@GetMapping("/category/low-price")
 	public Response getLowPriceByCategory() {
 		return Response.builder()
 				.code(200)
@@ -80,7 +80,7 @@ public class ProductController {
 				.build();
 	}
 	
-	@GetMapping("/low-price/one-brand")
+	@GetMapping("/one-brand/low-price")
 	public Response getLowPriceByOneBrand() {
 		return Response.builder()
 				.code(200)
@@ -89,7 +89,7 @@ public class ProductController {
 				.build();
 	}
 	
-	@GetMapping("/min-max-price/category")
+	@GetMapping("/category/min-max-price")
 	public Response getMinMaxPriceByCategory(@RequestParam("category") String category) {
 		return Response.builder()
 				.code(200)

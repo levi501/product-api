@@ -38,7 +38,7 @@ class ProductApiApplicationTests {
 	@DisplayName("카테고리 별 최저가격 브랜드와 상품 가격, 총액을 조회하는 API")
 	@Test
 	void lowPriceByCategoryTest() throws Exception {
-		mvc.perform(get("/api/products/low-price/category"))
+		mvc.perform(get("/api/products/category/low-price"))
 				.andExpect(status().isOk())
 				.andExpect(jsonPath("$.data.products.length()").value("8"))
 				.andExpect(jsonPath("$.data.total").value("34100"));
@@ -48,7 +48,7 @@ class ProductApiApplicationTests {
 	@DisplayName("단일 브랜드로 모든 카테고리 상품을 구매할 때 최저가격에 판매하는 브랜드와 카테고리의 상품가격, 총액을 조회하는 API")
 	@Test
 	void lowPriceByOneBrandTest() throws Exception {
-		mvc.perform(get("/api/products/low-price/one-brand"))
+		mvc.perform(get("/api/products/one-brand/low-price"))
 				.andExpect(status().isOk())
 				.andExpect(jsonPath("$.data.최저가.브랜드").value("D"))
 				.andExpect(jsonPath("$.data.최저가.총액").value("36100"));
@@ -58,7 +58,7 @@ class ProductApiApplicationTests {
 	@DisplayName("카테고리 이름으로 최저, 최고 가격 브랜드와 상품 가격을 조회하는 API")
 	@Test
 	void minMaxPriceByCategoryTest() throws Exception {
-		mvc.perform(get("/api/products/min-max-price/category?category=상의"))
+		mvc.perform(get("/api/products/category/min-max-price?category=상의"))
 				.andExpect(status().isOk())
 				.andExpect(jsonPath("$.data.카테고리").value("상의"))
 				.andExpect(jsonPath("$.data.최저가[0].브랜드").value("C"))
