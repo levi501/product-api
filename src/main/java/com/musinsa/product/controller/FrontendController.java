@@ -21,4 +21,9 @@ public class FrontendController {
 		model.addAttribute("categoryLowPrice", categoryLowPrice);
 		return "frontend";
 	}
+	
+	@GetMapping("favicon.ico")
+    @ResponseBody
+    void returnNoFavicon() {
+    }
 }
