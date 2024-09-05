@@ -1,6 +1,7 @@
 package com.musinsa.product.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.validation.annotation.Validated;
@@ -25,7 +26,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/api/products")
 public class ProductController {
 	private final ProductService productService;
-	
+
 	@PostMapping
 	public Response saveProduct(@RequestBody Product product) {
 		return Response.builder()
@@ -34,6 +35,7 @@ public class ProductController {
 				.data(productService.saveProduct(product))
 				.build();
 	}
+	
 	
 	@PutMapping("/{id}")
 	public Response updateProduct(@PathVariable(name = "id") Long id,
@@ -91,10 +93,19 @@ public class ProductController {
 	
 	@GetMapping("/category/min-max-price")
 	public Response getMinMaxPriceByCategory(@RequestParam("category") String category) {
+		CategoryMinMaxPrice categoryMinMaxPrice = productService.getMinMaxPriceByCategory(category);
+		
+		if (categoryMinMaxPrice == null) {
+			return Response.builder()
+					.code(404)
+					.message("카테고리가 존재하지 않습니다")
+					.build();
+		}
+		
 		return Response.builder()
 				.code(200)
 				.message("성공")
-				.data(productService.getMinMaxPriceByCategory(category))
+				.data(categoryMinMaxPrice)
 				.build();
 	}
 }
